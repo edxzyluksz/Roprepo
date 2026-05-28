@@ -3,17 +3,28 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Roblox</title>
+    <title>Roprepo</title>
+    <link rel="stylesheet" href="assets/css/main.css">
+    <link rel="stylesheet" href="assets/css/pages/login.css">
+    <link rel="shortcut icon" href="assets/icons/roprepo-icon.png" type="image/x-icon">
 </head>
-<body>
-    <header>
-
-    </header>
-    <main>
-        
+<body class="dark-mode">
+    <main class="login-main">
+        <form action="POST" method="backend/auth.php" class="acess-form">
+            <h1>Welcome to Roprepo!</h1>
+            <div class="input-group">
+                <input type="text" name="username" id="userInput" placeholder="Your username here..." autocomplete="off">
+                <input type="email" name="email" id="emailInput" placeholder="Your email here..." class="hidden" autocomplete="off">
+                <input type="password" name="passwd" id="passwdInput" placeholder="Enter the password..." autocomplete="off">
+                <input type="password" name="passwdVerify" id="passwdVerifyInput" placeholder="Retype the password..." class="hidden" autocomplete="off">
+                <span><a href="#" id="sign-in-btn">Create account</a></span>
+            </div>
+            <button type="submit" class='form-btn' id="submitBtn">Login</button>
+        </form>
     </main>
-    <footer>
-
+    <footer class="login-footer">
+        <span>&copy 2026 All rights reserved to Roblox Corporation (Made by <a href="https://github.com/edxzyluksz/" class="edxzy-media" target="_blank">EdxzyLuksz</a>)</span>
     </footer>
 </body>
+<script src="assets/js/login.js" defer></script>
 </html>

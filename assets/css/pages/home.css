@@ -1,0 +1,73 @@
+.home-main {
+    padding: 2.5rem;
+    gap: 3rem;
+}
+
+.userGreetings {
+    display: flex;
+    align-items: center;
+    height: clamp(100px, 10vh, 200px);
+    gap: 1rem;
+    text-wrap: nowrap;
+}
+
+.user-games {
+    display: flex;
+    flex-direction: column;
+    gap: 0.8rem;
+}
+
+.game-navigation {
+    display: flex;
+    height: clamp(220px, 30vh, 300px);
+}
+
+.page-control {
+    height: 80%;
+    background-color: var(--pressed-surface);
+    border-radius: 5px;
+    font-weight: 800;
+    opacity: 0.4;
+    transition: opacity 0.2s ease-in;
+}
+
+.page-control:hover {
+    opacity: 1;
+}
+
+.game-card-container {
+    height: 100%;
+    display: flex;
+    gap: 1rem;
+    overflow: hidden;
+    width: 100%;
+}
+
+.game-card-link {
+    display: flex;
+    flex-direction: column;
+    text-decoration: none;
+    height: 100%;
+    aspect-ratio: 1 / 2;
+}
+
+.game-card-thumb-container {
+    background-color: var(--pressed-surface);
+    height: 80%;
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+}
+
+.game-card-img {
+    height: 100%;
+    aspect-ratio: 1 / 1;
+    border-radius: 8px;
+    object-fit: cover;
+}
+
+.game-card-name {
+    width: 100%;
+    font-weight: 600;
+    display: -webkit-box; 
+    overflow: hidden;
+}

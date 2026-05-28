@@ -1,4 +1,4 @@
-# 🔷 Clone do Roblox
+# 🔷 Roprepo - Um clone de Roblox com PHP
 
 ## 💻 Introdução
 
@@ -6,7 +6,7 @@ Um projeto web com PHP Vanilla com o intuito buscar, de acordo com as preferênc
 
 ## 🧠 Contextualização
 
-Roblox é uma plataforma de jogos online e um sistema de criação de jogos desenvolvido pela Roblox Corporation que permite aos usuários programar e jogar jogos criados por eles próprios ou por outros usuários. Foi criado por David Baszucki e Erik Cassel em 2004 e lançado ao público em 2006. Em fevereiro de 2025, a plataforma registrava uma média de 85.3 milhões de usuários ativos diários. Segundo a empresa, sua base mensal de jogadores inclui metade de todas as crianças norte-americanas com menos de 16 anos.
+Roblox é uma plataforma de jogos online e um sistema de criação de jogos desenvolvido pela Roblox Corporation que permite aos usuários programar e jogar jogos criados por eles próprios ou por outros usuários. Foi criado por David Baszucki e Erik Cassel em 2004 e lançado ao público em 2006. Em fevereiro de 2025, a plataforma registrava uma média de 85.3 milhões de usuários ativos diários. Segundo a empresa, sua base mensal de jogadores inclui metade de todas as crianças norte-americanas com menos de 16 anos. Fonte: [Wikipedia](https://pt.wikipedia.org/wiki/Roblox)
 
 ## 📄 Planejamento Inicial
 
@@ -60,6 +60,12 @@ Os pontos ficarão guardados até que o jogo encerre de fato, para multiplicá-l
 
 Roblox Plus é o novo serviço de assinatura mensal da Roblox, lançado globalmente em 30 de abril de 2026, que substitui o Roblox Premium como a opção principal para novos usuários. O plano custa US$ 4,99 (ou R$ 29,90 no Brasil) por mês e foi projetado para ampliar o valor dos Robux através de benefícios exclusivos e descontos diretos.
 
+Para o Roprepo, esta página será acessível através do usuário e obtida após o jogador coletar 2000 Robux.
+
+### 👤 Perfil de Usuário
+
+O usuário poderá fazer customizações simples com foto de perfil selecionável, biografia personalizada e a opção de escolher qual título entre os adquiridos deseja utilizar.
+
 Por se tratar de um clone da plataforma, a assinatura Plus terá uma página dedicada e poderá somente ser adquirida caso o jogador possua robux o suficiente obtidos através dos jogos - 1000 Robux
 
 ## 🧩 Modelagem de Dados
@@ -70,10 +76,36 @@ erDiagram
         int id PK
         string username "UNIQUE NOT NULL"
         string password "NOT NULL"
+        string pfp_url "DEFAULT=default.png"
         int robux "DEFAULT=0 NOT NULL"
-        string customizedTitle "DEFAULT=player"
+        int active_title FK
+        string bio
+        bool darkMode "DEFAULT=true"
         bool isPlus "DEFAULT=false NOT NULL"
-        bool isAdmin "DEFAULT=false NOT NULL"
+    }
+
+    ROLES {
+        int id PK
+        string role "DEFAULT=user"
+    }
+
+    TITLES {
+        int id PK
+        string title
+        string color "DEFAULT='--text-color'"
+        int price
+    }
+
+    USER_ROLES {
+        int id PK
+        int user_id FK
+        int role_id FK
+    }
+
+    USER_TITLES {
+        int id PK
+        int user_id FK
+        int title_id FK
     }
 ```
 
