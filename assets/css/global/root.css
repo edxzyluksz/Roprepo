@@ -1,9 +1,0 @@
-/* Valor Padrão das Variáveis */
-:root {
-    --background-color: #ffffff;
-    --text-color: #202227;
-    --surface-color: #f7f7f8;
-    --pressed-surface: #edeef1;
-    --border-color: #dbdce3;
-    --input-padding: 0.75rem;
-}

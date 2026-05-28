@@ -17,9 +17,9 @@ A aplicação buscará seguir as funcionalidades básicas da página web [Roblox
 O site deverá seguir os elementos visuais encontrados no Roblox, como por exemplo a fonte `Builder Sans`, Ícones (Logo, Robux, Assinatura Plus), exibidos abaixo:
 
 <div>
-    <img src="assets/img/roblox-corporation-2025-logo.png" width="56">
-    <img src="assets/img/roblox-2019-logo-gold.png" width="56">
-    <img src="assets/img/roblox-plus-logo.png" width="56">
+    <img src="public/assets/img/roblox-corporation-2025-logo.png" width="56">
+    <img src="public/assets/img/roblox-2019-logo-gold.png" width="56">
+    <img src="public/assets/img/roblox-plus-logo.png" width="56">
 </div>
 
 ## 📑 Páginas Existentes
@@ -84,6 +84,13 @@ erDiagram
         bool isPlus "DEFAULT=false NOT NULL"
     }
 
+    GAMES {
+        int id PK
+        string name
+        int likes
+        int points_multiplier "DEFAULT=0.35"
+    }
+
     ROLES {
         int id PK
         string role "DEFAULT=user"
@@ -121,7 +128,7 @@ Todo usuário no qual não possui sessão atual ao sistema atribuído a uma tupl
 
 ### Requisito 3 - Sistema Monetário/de Pontuação (Robux)
 
-Ao se deparar com os jogos existentes nos charts, o usuário conseguirá obter pontos com o progresso obtido e utilizar esta pontuação para adquirir cosméticos de títulos do catálogo.
+Ao se deparar com os jogos existentes nos charts, o usuário conseguirá obter pontos com o progresso obtido e utilizar esta pontuação para adquirir cosméticos de títulos do catálogo ou Roprepo Plus.
 
 ## ⚒️ Ferramentas
 
