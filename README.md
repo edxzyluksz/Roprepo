@@ -17,9 +17,9 @@ A aplicação buscará seguir as funcionalidades básicas da página web [Roblox
 O site deverá seguir os elementos visuais encontrados no Roblox, como por exemplo a fonte `Builder Sans`, Ícones (Logo, Robux, Assinatura Plus), exibidos abaixo:
 
 <div>
-    <img src="assets/img/Roblox_Corporation_2025_logo.png" width="56">
-    <img src="assets/img/Robux_2019_Logo_gold.png" width="56">
-    <img src="assets/img/Roblox_Plus_Logo.png" width="56">
+    <img src="assets/img/roblox-corporation-2025-logo.png" width="56">
+    <img src="assets/img/roblox-2019-logo-gold.png" width="56">
+    <img src="assets/img/roblox-plus-logo.png" width="56">
 </div>
 
 ## 📑 Páginas Existentes
