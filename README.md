@@ -8,6 +8,14 @@ Um projeto web com PHP Vanilla com o intuito buscar, de acordo com as preferênc
 
 Roblox é uma plataforma de jogos online e um sistema de criação de jogos desenvolvido pela Roblox Corporation que permite aos usuários programar e jogar jogos criados por eles próprios ou por outros usuários. Foi criado por David Baszucki e Erik Cassel em 2004 e lançado ao público em 2006. Em fevereiro de 2025, a plataforma registrava uma média de 85.3 milhões de usuários ativos diários. Segundo a empresa, sua base mensal de jogadores inclui metade de todas as crianças norte-americanas com menos de 16 anos. Fonte: [Wikipedia](https://pt.wikipedia.org/wiki/Roblox)
 
+## 🛑 Aviso de Isenção de Responsabilidade (Disclaimer)
+
+**Este é um projeto estritamente acadêmico e sem fins lucrativos.** O **Roprepo** é um clone conceitual desenvolvido exclusivamente para fins de estudo de desenvolvimento web (PHP, Banco de Dados e operações CRUD). 
+
+* **Sem Vínculo Oficial:** Este projeto não é afiliado, associado, autorizado, endossado ou de qualquer forma conectado oficialmente à Roblox Corporation, ou a qualquer uma de suas subsidiárias ou afiliadas.
+* **Propriedade Intelectual:** O nome "Roblox", bem como marcas registradas, logotipos e identidades visuais mencionadas ou utilizadas neste repositório são de propriedade exclusiva de seus respectivos donos. Este projeto utiliza tais elementos sob o princípio de *Fair Use* (Uso Justo) para fins educacionais.
+* **Monetização:** Não há transações financeiras reais nesta aplicação. O sistema de "Robux" e "Assinatura Plus" mencionado é puramente simulado por meio de lógica de programação local e banco de dados fictício.
+
 ## 📄 Planejamento Inicial
 
 A aplicação buscará seguir as funcionalidades básicas da página web [Roblox](https://roblox.com), como sistema monetário (Robux), usuários únicos e jogos, que neste caso, serão experimentados pelo navegador e sem a possibilidade de serem criados pelos próprios jogadores.
@@ -19,7 +27,7 @@ O site deverá seguir os elementos visuais encontrados no Roblox, como por exemp
 <div>
     <img src="public/assets/img/roblox-corporation-2025-logo.png" width="56">
     <img src="public/assets/img/roblox-2019-logo-gold.png" width="56">
-    <img src="public/assets/img/roblox-plus-logo.png" width="56">
+    <img src="public/assets/icons/roblox-plus-logo.svg" width="56">
 </div>
 
 ## 📑 Páginas Existentes
@@ -72,47 +80,47 @@ Por se tratar de um clone da plataforma, a assinatura Plus terá uma página ded
 
 ``` mermaid
 erDiagram
-    USER {
+    USERS {
         int id PK
         string username "UNIQUE NOT NULL"
-        string password "NOT NULL"
+        string email "UNIQUE NOT NULL"
+        string password_hash "NOT NULL"
         string pfp_url "DEFAULT=default.png"
-        int robux "DEFAULT=0 NOT NULL"
+        int robux "DEFAULT=0"
         int active_title FK
         string bio
-        bool darkMode "DEFAULT=true"
-        bool isPlus "DEFAULT=false NOT NULL"
-    }
-
-    GAMES {
-        int id PK
-        string name
-        int likes
-        int points_multiplier "DEFAULT=0.35"
+        bool dark_mode "DEFAULT=true"
+        bool is_plus "DEFAULT=false"
     }
 
     ROLES {
         int id PK
-        string role "DEFAULT=user"
+        string name "DEFAULT=user UNIQUE"
     }
 
     TITLES {
         int id PK
-        string title
+        string name
         string color "DEFAULT='--text-color'"
-        int price
+        int price "DEFAULT=100"
+        int likes "DEFAULT=0"
     }
 
     USER_ROLES {
-        int id PK
         int user_id FK
         int role_id FK
     }
 
     USER_TITLES {
-        int id PK
         int user_id FK
         int title_id FK
+    }
+
+    GAMES {
+        int id PK
+        string name "NOT NULL"
+        string description
+        int likes "DEFAULT=0"
     }
 ```
 
@@ -120,7 +128,7 @@ erDiagram
 
 ### Requisito 1 - Consistência e Reaproveitamento de Código
 
-O desenvolvimento utilizará `/includes` como maneira de reutilizar elementos HTML previsíveis em todas as páginas (a exemplo de header e footer), através do método de importação PHP `include` - Permite a execução da página mesmo com a ausência destes arquivos.
+O desenvolvimento utilizará `/includes` como maneira de reutilizar elementos HTML existentes em (quase) todas as páginas, com o PHP replicando o conteúdo para o cliente.
 
 ### Requisito 2 - Cadastro Obrigatório
 
@@ -129,6 +137,17 @@ Todo usuário no qual não possui sessão atual ao sistema atribuído a uma tupl
 ### Requisito 3 - Sistema Monetário/de Pontuação (Robux)
 
 Ao se deparar com os jogos existentes nos charts, o usuário conseguirá obter pontos com o progresso obtido e utilizar esta pontuação para adquirir cosméticos de títulos do catálogo ou Roprepo Plus.
+
+### Requisito 4 - Contas de Usuário
+
+Todo usuário deverá possuir por padrão, porém não limitado a:
+
+* Cargo `user` para restringi-lo a permissões privilegiadas. Ex: Manipular o BD
+* Título `player` como padrão
+* Foto de Perfil `default.png` caso não haja personalização do próprio usuário.
+* Total de 0 `robux` iniciais
+* `dark_mode` habilitado
+* Roprepo `plus` desabilitado
 
 ## ⚒️ Ferramentas
 

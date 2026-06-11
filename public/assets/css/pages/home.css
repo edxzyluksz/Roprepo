@@ -1,73 +1,47 @@
 .home-main {
-    padding: 2.5rem;
     gap: 3rem;
+    align-items: center;
+    justify-content: center;
 }
 
-.userGreetings {
+.user-greetings {
     display: flex;
     align-items: center;
-    height: clamp(100px, 10vh, 200px);
+    height: clamp(6.25rem, 10vh, 12.5rem);
     gap: 1rem;
     text-wrap: nowrap;
 }
 
-.user-games {
+.user.pfp {
+    height: 60%;
+}
+
+h1 {
+    font-size: clamp(1.5rem, 4vw, 2.5rem); 
+    font-weight: 700;
+}
+
+.user-steps {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    gap: 2rem;
+    padding: 1rem;
+}
+
+.step-option {
     display: flex;
     flex-direction: column;
-    gap: 0.8rem;
-}
-
-.game-navigation {
-    display: flex;
-    height: clamp(220px, 30vh, 300px);
-}
-
-.page-control {
-    height: 80%;
-    background-color: var(--pressed-surface);
-    border-radius: 5px;
-    font-weight: 800;
-    opacity: 0.4;
-    transition: opacity 0.2s ease-in;
-}
-
-.page-control:hover {
-    opacity: 1;
-}
-
-.game-card-container {
-    height: 100%;
-    display: flex;
-    gap: 1rem;
-    overflow: hidden;
-    width: 100%;
-}
-
-.game-card-link {
-    display: flex;
-    flex-direction: column;
-    text-decoration: none;
-    height: 100%;
-    aspect-ratio: 1 / 2;
-}
-
-.game-card-thumb-container {
-    background-color: var(--pressed-surface);
-    height: 80%;
-    border: 1px solid var(--border-color);
-    border-radius: 8px;
-}
-
-.game-card-img {
-    height: 100%;
     aspect-ratio: 1 / 1;
-    border-radius: 8px;
-    object-fit: cover;
+    width: clamp(5rem, 7.5vw, 8rem);
+    text-align: center;
 }
 
-.game-card-name {
-    width: 100%;
-    font-weight: 600;
-    display: -webkit-box; 
-    overflow: hidden;
+.step-option:hover img {
+    filter: drop-shadow(0 0 8px var(--text-color));
+}
+
+.step-option img {
+    height: 100%;
 }

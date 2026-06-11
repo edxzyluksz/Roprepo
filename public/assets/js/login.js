@@ -26,7 +26,7 @@ aBtn.addEventListener('click', async () => {
     }
     submitBtn.classList.remove("invisible-text");
     submitBtn.classList.add("highlight-border");
-    await timeGap(500);
+    await timeGap(1000);
     submitBtn.classList.remove("highlight-border");
 });
 
