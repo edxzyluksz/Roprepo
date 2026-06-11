@@ -1,3 +1,5 @@
+CREATE DATABASE roprepo;
+
 CREATE TABLE "users" (
     id BIGSERIAL PRIMARY KEY, -- Impede dores de cabeça futuras previnindo overflow de inteiro com 'BIG'
     username VARCHAR(20) UNIQUE NOT NULL,
@@ -7,7 +9,8 @@ CREATE TABLE "users" (
     bio TEXT,
     robux INT NOT NULL DEFAULT 0,
     dark_mode BOOLEAN DEFAULT TRUE,
-    is_plus BOOLEAN DEFAULT FALSE
+    is_plus BOOLEAN DEFAULT FALSE,
+    created_at TIMESTAMPTZ NOT NULL DEFAULT NOW() -- Pega o fuso horário atual do servidor
 );
 
 CREATE TABLE "roles" (

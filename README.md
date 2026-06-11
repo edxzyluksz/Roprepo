@@ -83,6 +83,7 @@ erDiagram
         string bio
         bool dark_mode "DEFAULT=true"
         bool is_plus "DEFAULT=false"
+        string created_at "TIMESTAMP NOW()"
     }
 
     ROLES {

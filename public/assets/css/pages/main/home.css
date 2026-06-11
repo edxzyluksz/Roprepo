@@ -1,5 +1,5 @@
 .home-main {
-    gap: 3rem;
+    gap: 4rem;
     align-items: center;
     justify-content: center;
 }
@@ -12,8 +12,8 @@
     text-wrap: nowrap;
 }
 
-.user.pfp {
-    height: 60%;
+main .user-pfp {
+    width: clamp(5rem, 10vw, 10rem);
 }
 
 h1 {
@@ -36,6 +36,10 @@ h1 {
     aspect-ratio: 1 / 1;
     width: clamp(5rem, 7.5vw, 8rem);
     text-align: center;
+}
+
+.step-option img {
+    transition: filter 0.3s;
 }
 
 .step-option:hover img {
