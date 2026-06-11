@@ -14,7 +14,7 @@
     content: "";
     position: absolute;
     inset: 0;
-    background-image: url(../../img/roprepo-login.png);
+    background-image: url(../../img/system/login-background.png);
     background-repeat: no-repeat;
     background-size: cover;
     filter: blur(3px);

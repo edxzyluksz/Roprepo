@@ -14,7 +14,7 @@ Roblox é uma plataforma de jogos online e um sistema de criação de jogos dese
 
 * **Sem Vínculo Oficial:** Este projeto não é afiliado, associado, autorizado, endossado ou de qualquer forma conectado oficialmente à Roblox Corporation, ou a qualquer uma de suas subsidiárias ou afiliadas.
 * **Propriedade Intelectual:** O nome "Roblox", bem como marcas registradas, logotipos e identidades visuais mencionadas ou utilizadas neste repositório são de propriedade exclusiva de seus respectivos donos. Este projeto utiliza tais elementos sob o princípio de *Fair Use* (Uso Justo) para fins educacionais.
-* **Monetização:** Não há transações financeiras reais nesta aplicação. O sistema de "Robux" e "Assinatura Plus" mencionado é puramente simulado por meio de lógica de programação local e banco de dados fictício.
+* **Monetização:** Não há transações financeiras reais nesta aplicação. O sistema de "Robux" e "Assinatura Plus" mencionado é puramente simulado por meio de lógica de programação local com persistência de dados.
 
 ## 📄 Planejamento Inicial
 
@@ -22,13 +22,7 @@ A aplicação buscará seguir as funcionalidades básicas da página web [Roblox
 
 ## 🩻 Estrutura Estética
 
-O site deverá seguir os elementos visuais encontrados no Roblox, como por exemplo a fonte `Builder Sans`, Ícones (Logo, Robux, Assinatura Plus), exibidos abaixo:
-
-<div>
-    <img src="public/assets/img/roblox-corporation-2025-logo.png" width="56">
-    <img src="public/assets/img/roblox-2019-logo-gold.png" width="56">
-    <img src="public/assets/icons/roblox-plus-logo.svg" width="56">
-</div>
+O site deverá seguir os elementos visuais encontrados na plataforma oficial do Roblox, como por exemplo a fonte `Builder Sans`, Ícones .svg de UX/UI e proposta de charts/catálogo para melhorar a experiência.
 
 ## 📑 Páginas Existentes
 
@@ -67,8 +61,6 @@ Os pontos ficarão guardados até que o jogo encerre de fato, para multiplicá-l
 ### ✒️ Pseudo-Assinatura Plus
 
 Roblox Plus é o novo serviço de assinatura mensal da Roblox, lançado globalmente em 30 de abril de 2026, que substitui o Roblox Premium como a opção principal para novos usuários. O plano custa US$ 4,99 (ou R$ 29,90 no Brasil) por mês e foi projetado para ampliar o valor dos Robux através de benefícios exclusivos e descontos diretos.
-
-Para o Roprepo, esta página será acessível através do usuário e obtida após o jogador coletar 2000 Robux.
 
 ### 👤 Perfil de Usuário
 
@@ -124,11 +116,15 @@ erDiagram
     }
 ```
 
+> OBS: As definições do PostgreSQL são mais robustas em tipos de dados, como observa-se em `docs/sql`
+
 ## 🔧 Requisitos Técnicos
 
 ### Requisito 1 - Consistência e Reaproveitamento de Código
 
 O desenvolvimento utilizará `/includes` como maneira de reutilizar elementos HTML existentes em (quase) todas as páginas, com o PHP replicando o conteúdo para o cliente.
+
+> Inicialmente, o projeto utiliza-se de páginas estáticas `.html` para definir o layout antes da lógica.
 
 ### Requisito 2 - Cadastro Obrigatório
 
@@ -149,16 +145,24 @@ Todo usuário deverá possuir por padrão, porém não limitado a:
 * `dark_mode` habilitado
 * Roprepo `plus` desabilitado
 
+## ✅ Boas Práticas
+
+No desenvolvimento do back-end deste projeto, seguirá-se estas práticas:
+
+* **NUNCA** Confiar no Cliente. Sempre valide entradas enviadas pelo navegador.
+* Ao usuário atualizar sua foto de perfil, remova a anterior de `avatars/` imediatamente.
+* Redirecionar clientes ao conteúdo da página `404.php` caso digite um GET inválido no URL.
+
 ## ⚒️ Ferramentas
 
 Priorizando a documentação concisa, o projeto utilizará as seguintes ferramentas:
 
-* VS Code - IDE com Snippets PHP
-* Figma - Prototipagem das Páginas
-* HTML - Estruturação HTTP
-* CSS - Estilização condizente à plataforma Roblox
-* JS - Manipulação Frontend, como DOM
-* Postgres - Persistência dos dados dos usuários e seus atributos
-* PHP - Trata a lógica de credenciais (login e senha)
+* [VS Code](https://code.visualstudio.com/) - IDE com Snippets PHP
+* [Figma](https://www.figma.com/design/y4IJ5PIkA6FdPhkoohRL7q/Roprepo?t=1m7FP6U1ZjpxKs8j-1) - Prototipagem das Páginas
+* [HTML](https://developer.mozilla.org/pt-BR/docs/Web/HTML) - Estruturação HTTP
+* [CSS](https://developer.mozilla.org/pt-BR/docs/Web/CSS) - Estilização condizente à plataforma Roblox
+* [JS](https://developer.mozilla.org/pt-BR/docs/Web/JavaScript) - Manipulação Frontend, como DOM
+* [Postgres](https://www.postgresql.org/) - Persistência dos dados dos usuários e seus atributos
+* [PHP](https://www.php.net/) - Trata a lógica de credenciais (login e senha)
 
-<img src="https://skillicons.dev/icons?i=vscode,figma,html,css,js,postgres,php)">
+[!Icons](https://skillicons.dev/icons?i=vscode,figma,html,css,js,postgres,php)
