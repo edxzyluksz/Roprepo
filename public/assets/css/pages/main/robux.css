@@ -7,7 +7,7 @@ main {
 }
 
 .game-card-link {
-    width: clamp(15rem, 25vw, 20rem);
+    width: clamp(10rem, 25vw, 15rem);
 }
 
 .rewarding-games {
@@ -23,4 +23,9 @@ main {
 
 .plus-advise .btn {
     width: unset;
+}
+
+.game-card-container {
+    overflow-x: unset;
+    flex-wrap: wrap;
 }

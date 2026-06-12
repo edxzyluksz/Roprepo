@@ -1,15 +1,28 @@
 const form = document.querySelector("form");
 const username = document.querySelector("#userInput");
+const email = document.querySelector("#emailInput")
 const passwd = document.querySelector("#passwdInput");
 const passwdVerify = document.querySelector("#passwdVerifyInput");
-const email = document.querySelector("#emailInput")
 const submitBtn = document.querySelector("#submitBtn");
 const aBtn = document.querySelector("#sign-in-btn");
+const message = document.querySelector("#response-message");
+const inputs = document.querySelectorAll("input")
 let registerMode = false;
 
 const timeGap = (ms) => new Promise(resolve => setTimeout(resolve, ms));
 
+function showMessage(element, text) {
+    element.classList.remove("killed");
+    element.textContent = text;
+}
+
+function hideMessage(element) {
+    element.classList.add("killed");
+    element.textContent = "";
+}
+
 aBtn.addEventListener('click', async () => {
+    hideMessage(message);
     registerMode = !registerMode;
     submitBtn.classList.add("invisible-text");
     await timeGap(400);
@@ -23,6 +36,8 @@ aBtn.addEventListener('click', async () => {
         aBtn.textContent = "Create account";
         email.classList.add("hidden");
         passwdVerify.classList.add("hidden");
+        passwd.classList.remove("warning");
+        passwdVerify.classList.remove("warning");
     }
     submitBtn.classList.remove("invisible-text");
     submitBtn.classList.add("highlight-border");
@@ -30,6 +45,94 @@ aBtn.addEventListener('click', async () => {
     submitBtn.classList.remove("highlight-border");
 });
 
-form.addEventListener("submit", (e) => {
+form.addEventListener("submit", async (e) => {
     e.preventDefault();
+
+    inputs.forEach(input =>  {
+        input.classList.remove("failed-input");
+        input.classList.remove("warning");
+    });
+
+    hideMessage(message);
+
+    const userValue = username.value.trim();
+    const emailValue = email.value.trim();
+    const passwdValue = passwd.value.trim();
+    const verifyValue = passwdVerify.value.trim();
+
+    const toValidate = registerMode ? [username, email, passwd, passwdVerify] : [username, passwd];
+    let isEmpty = false;
+
+    toValidate.forEach((field) => {
+        if (field.value.trim() === "") {
+            field.classList.add("failed-input");
+            isEmpty = true;
+        }
+    });
+
+    if (isEmpty) {
+        showMessage(message,"Please, fill all fields to proceed.");
+        return;
+    }
+
+    // !RegisterMode
+    if (userValue.length < 3) {
+        username.classList.add("warning")
+        showMessage(message, "User must have more than 3 characters.");
+        return;
+    } else if (userValue.length > 20) {
+        username.classList.add("warning")
+        showMessage(message, "User must have less or equal to 20 characters.");
+        return;
+    } 
+
+    if (passwdValue.length < 6) {
+        passwd.classList.add("warning")
+        showMessage(message, "Password must have atleast 6 characters.");
+        return;
+    }
+
+    // RegisterMode
+    if (registerMode) {
+        if (!emailValue.includes("@") || !emailValue.includes(".")) {
+            email.classList.add("warning");
+            showMessage(message, "Please enter a valid email address.");
+            return;
+        }
+
+        if (passwdValue !== verifyValue) {
+            passwd.classList.add("warning");
+            passwdVerify.classList.add("warning");
+            showMessage(message, "Passwords do not match!");
+            return;
+        }
+    }
+
+    const url = registerMode ? "/index.php?action=register" : "/index.php?action=login";
+    const formData = new FormData(form);
+
+    try {
+        const response = await fetch(url, {
+            method: "POST",
+            body: formData
+        });
+
+        const data = await response.json();
+
+        // Retornos do Servidor
+        
+    } catch (error) {
+        console.error("Fetch Error:", error)
+        showMessage(message, "Something went wrong. Try again later.")
+    }
 });
+
+inputs.forEach((input) => {
+    input.addEventListener("focus", () => {
+        hideMessage(message);
+    })
+    input.addEventListener("input", () => {
+        input.classList.remove("failed-input") // Abordagem otimista (Remove a borda vermelha assim que algo mudar)
+        input.classList.remove("warning");
+    })
+})

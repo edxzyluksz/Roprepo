@@ -12,6 +12,14 @@
     background-color: var(--pressed-surface);
 }
 
+.failed-input {
+    border: 1px solid rgb(148, 19, 19);
+}
+
+.warning {
+    border: 1px solid #d1ce34;
+}
+
 .hidden {
     max-height: 0;
     opacity: 0;
@@ -80,11 +88,9 @@
     display: flex;
     gap: 1rem;
     flex: 1;
-    overflow-x: hidden; /* Esconde perfeitamente os cards que passam */
+    overflow-x: hidden;
     scroll-behavior: smooth;
     scroll-snap-type: x mandatory;
-    
-    /* REMOVIDO: Margens negativas e paddings que faziam o container se mexer */
     max-width: 100%;
 }
 

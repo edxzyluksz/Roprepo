@@ -21,6 +21,10 @@ h1 {
     font-weight: 700;
 }
 
+h2 {
+    font-size: clamp(1rem, 3.5vw, 2rem); 
+}
+
 .user-steps {
     display: flex;
     flex-wrap: wrap;

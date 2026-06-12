@@ -10,7 +10,7 @@ CREATE TABLE "users" (
     robux INT NOT NULL DEFAULT 0,
     dark_mode BOOLEAN DEFAULT TRUE,
     is_plus BOOLEAN DEFAULT FALSE,
-    created_at TIMESTAMPTZ NOT NULL DEFAULT NOW() -- Pega o fuso horário atual do servidor
+    created_at TIMESTAMPTZ NOT NULL DEFAULT NOW() -- Pega a data c/ fuso horário atual do servidor
 );
 
 CREATE TABLE "roles" (
