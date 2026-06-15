@@ -1,4 +1,10 @@
-<link rel="stylesheet" href="/assets/css/pages/main/robux.css">
+<?php
+if (!defined('ROPREPO_ACCESS')) {
+    http_response_code(404);
+    include __DIR__ . '/../../not_index.php';
+    exit;
+}
+?>
 <main>
     <section class="robux-intro">
         <h1>Robux</h1>
@@ -13,30 +19,31 @@
     <section class="robux-advice game-display">
         <h2>Most Rewarding Games</h2>
         <p>Here are the three games which provides the most points</p>
+        <!-- Meta: Fazer um SELECT no Postgres que renderiza os 3 jogos com maior multiplicador de pontos -->
         <nav class="rewarding-games game-navigation">
             <div class="game-card-container">
                 <a href="#" class="game-card-link">
                     <div class="game-card-thumb-container">
-                        <img src="https://pbs.twimg.com/media/HBfrmfMbUAEafQj.jpg" alt="Game" class="game-card-img">
+                        <img src="" alt="Game" class="game-card-img">
                     </div>
                     <div class="game-card-name">
-                        <span>ERROR 404</span>
+                        <span>1</span>
                     </div>
                 </a>
                 <a href="#" class="game-card-link">
                     <div class="game-card-thumb-container">
-                        <img src="https://pbs.twimg.com/media/HBfrmfMbUAEafQj.jpg" alt="Game" class="game-card-img">
+                        <img src="" alt="Game" class="game-card-img">
                     </div>
                     <div class="game-card-name">
-                        <span>ERROR 404</span>
+                        <span>2</span>
                     </div>
                 </a>
                 <a href="#" class="game-card-link">
                     <div class="game-card-thumb-container">
-                        <img src="https://pbs.twimg.com/media/HBfrmfMbUAEafQj.jpg" alt="Game" class="game-card-img">
+                        <img src="" alt="Game" class="game-card-img">
                     </div>
                     <div class="game-card-name">
-                        <span>ERROR 404</span>
+                        <span>3</span>
                     </div>
                 </a>
             </div>
@@ -44,6 +51,6 @@
     </section>
     <section class="plus-advise">
         <h2>Get Roprepo Plus</h2>
-        <a href="/index.php?page=plus" class="btn">Here</a>
+        <a href="/plus" class="btn">Here</a>
     </section>
 </main>

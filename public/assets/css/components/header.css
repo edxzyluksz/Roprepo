@@ -62,11 +62,6 @@ header {
     align-self: center;
 }
 
-.search-bar::after {
-    content: "";
-    background: url(https://marketplace.canva.com/LLr8M/MAD4NGLLr8M/1/tl/canva-magnify-MAD4NGLLr8M.png);
-}
-
 .user-section {
     flex-shrink: 0; 
     height: 100%;

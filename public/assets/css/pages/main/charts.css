@@ -9,7 +9,7 @@ main {gap: 2rem;}
 
 /* CONFIGURAÇÃO DAS SETAS COPIANDO O VISUAL DA SUA FOTO */
 .page-control {
-    background-color: rgba(0, 0, 0, 0.75); /* Fundo escuro idêntico ao print */
+    background-color: var(--pressed-surface); /* Fundo escuro idêntico ao print */
     color: var(--text-color);
     border: none;
     width: 2.2rem;

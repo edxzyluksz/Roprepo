@@ -30,13 +30,33 @@ O site deverá seguir os elementos visuais encontrados na plataforma oficial do 
 
 Para usuários que não possuem uma sessão atual e devem criar uma conta para prosseguir.
 
-### 🏠 Home/Início
+### 🏠 Home
 
-Esta será a página onde o usuário poderá ver seu nome de usuário e título, assim como os jogos disponíveis para acesso.
+Página introdutória. Seu propósito é saudar o usuário (recém logado no sistema) e perguntar qual das 3 outras páginas importantes ele deseja entrar: Charts, Catalog, Profile.
 
-### 🎮 Jogos
+### 📃 Charts
 
-Estas possuirão a possiblidade do usuário jogar experiências relativamente simples, com o intuito de obter pontos.
+Um grande painel com a função de renderizar para o navegador os jogos registrados no banco de dados (no momento, pelo próprio criador).
+
+### 🛒 Catalog
+
+Exibe os itens disponíveis para o usuário comprar com os pontos (Robux) acumulados. Limitados a títulos como cosméticos (c/ cor, preço e nome).
+
+### 👤 Profile
+
+O lugar de customização personalizada do usuário, com um painel lateral (inferior em telas pequenas) para modificar aspectos visuais do sistema.
+
+### 💵 Robux
+
+Página tutorial - Define os conceitos básicos de Robux (na plataforma Roprepo) para informar o usuário.
+
+### ➕ Plus
+
+Roblox Plus é o novo serviço de assinatura mensal da Roblox, lançado globalmente em 30 de abril de 2026, que substitui o Roblox Premium como a opção principal para novos usuários. O plano custa US$ 4,99 (ou R$ 29,90 no Brasil) por mês e foi projetado para ampliar o valor dos Robux através de benefícios exclusivos e descontos diretos.
+
+Acessível através da página de Robux, esta será uma página onde aqueles que possuem quantia o suficiente podem navegar para adquirir as vantagens.
+
+### 🎮 App - Jogos
 
 #### 🔴 Pong - Solo
 
@@ -50,74 +70,17 @@ Alto risco, alto ganho - O jogador poderá apostar os seus robux atuais para obt
 
 Múltiplas entidades aparecerão na tela em questão de segundos. O objetivo é acertar o máximo de toupeiras possível antes que atinja um alvo que encerre o jogo.
 
-#### Outras Possibilidades (Brainstorming)
+#### 🧠 Outras Possibilidades (Brainstorming)
 
-##### Pedra, Papel, Tesoura
+##### 🖐 Pedra, Papel, Tesoura
 
 O jogador escolherá entre as três possibilidades, e o computador sorteará um número de 0 a 2 para enfrentá-lo. Ao vencer, o usuário ganhará 5 pontos, ao perder perderá 2 pontos e ao empatar, nenhum ponto será adicionado.
 
 Os pontos ficarão guardados até que o jogo encerre de fato, para multiplicá-los finalmente por 0.15 pontos reais.
 
-### ✒️ Pseudo-Assinatura Plus
-
-Roblox Plus é o novo serviço de assinatura mensal da Roblox, lançado globalmente em 30 de abril de 2026, que substitui o Roblox Premium como a opção principal para novos usuários. O plano custa US$ 4,99 (ou R$ 29,90 no Brasil) por mês e foi projetado para ampliar o valor dos Robux através de benefícios exclusivos e descontos diretos.
-
-### 👤 Perfil de Usuário
-
-O usuário poderá fazer customizações simples com foto de perfil selecionável, biografia personalizada e a opção de escolher qual título entre os adquiridos deseja utilizar.
-
-Por se tratar de um clone da plataforma, a assinatura Plus terá uma página dedicada e poderá somente ser adquirida caso o jogador possua robux o suficiente obtidos através dos jogos - 1000 Robux
-
 ## 🧩 Modelagem de Dados
 
-``` mermaid
-erDiagram
-    USERS {
-        int id PK
-        string username "UNIQUE NOT NULL"
-        string email "UNIQUE NOT NULL"
-        string password_hash "NOT NULL"
-        string pfp_url "DEFAULT=default.png"
-        int robux "DEFAULT=0"
-        int active_title FK
-        string bio
-        bool dark_mode "DEFAULT=true"
-        bool is_plus "DEFAULT=false"
-        string created_at "TIMESTAMP NOW()"
-    }
-
-    ROLES {
-        int id PK
-        string name "DEFAULT=user UNIQUE"
-    }
-
-    TITLES {
-        int id PK
-        string name
-        string color "DEFAULT='--text-color'"
-        int price "DEFAULT=100"
-        int likes "DEFAULT=0"
-    }
-
-    USER_ROLES {
-        int user_id FK
-        int role_id FK
-    }
-
-    USER_TITLES {
-        int user_id FK
-        int title_id FK
-    }
-
-    GAMES {
-        int id PK
-        string name "NOT NULL"
-        string description
-        int likes "DEFAULT=0"
-    }
-```
-
-> OBS: As definições do PostgreSQL são mais robustas em tipos de dados, como observa-se em `docs/sql`
+A modelagem de dados é a parte principal para determinar as entidades da aplicação. Em Roprepo, existirão três entidades principais: Users, Games, Titles. Seus esquemas estão presentes em `/docs/sql/ddl`.
 
 ## 🔧 Requisitos Técnicos
 

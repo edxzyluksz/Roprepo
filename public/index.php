@@ -1,87 +1,72 @@
 <?php
-
-// .env -> Mantém informações sensíveis seguras (sem push no GitHub)
-function loadEnv(string $path): bool {
-    if (!file_exists($path)) {
-        return false;
-    }
-
-    // Lê o arquivo em um array, ignorando quebras de linha e linhas vazias
-    $lines = file($path, FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES);
-
-    foreach ($lines as $line) {
-        // Ignora linhas de comentários que começam com '#'
-        if (strpos(trim($line), '#') === 0) {
-            continue;
-        }
-
-        // Divide a linha em nome e valor no primeiro '=' que encontrar
-        list($name, $value) = explode('=', $line, 2);
-
-        // Salva a chave e o valor limpos dentro da superglobal $_ENV
-        $_ENV[trim($name)] = trim($value);
-    }
-
-    return true;
-}
-
-// Executa o carregamento apontando para a raiz (fora da pasta public)
-loadEnv(__DIR__ . '/../.env');
-
 session_start();
 
+// Chave de Segurança: Impede do usuário digitar caminhos reais do servidor na URL
+define('ROPREPO_ACCESS', true);
+
+// Extrai os caminhos reais do servidor (Atalhos)
 define('ROOT', realpath(__DIR__ . '/../'));
 define('INCLUDES', ROOT . '/includes');
 define('BACKEND', ROOT . '/backend');
 
-// Conexão com o Banco de Dados
 require_once BACKEND . '/config/database.php';
 
+// Peça chave: Identifica a URL acionada pelo cliente
+$page = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
 
-// Ajax do Login
-$action = $_GET['action'] ?? '';
+// APIs Públicas (Não precisam de autenticação para chamar)
+$publicAPIs = require_once BACKEND . '/routes/public_api.php';
 
-if ($action === 'login' || $action === 'register') {
-    // Esse arquivo processa o banco e encerra com exit devolvendo um JSON
-    require_once BACKEND . '/auth.php'; 
+// Middleware protetor -> Dispara HTTP 429 caso haja spam
+require_once BACKEND . '/middleware/rate_limit.php';
+
+if (array_key_exists($page, $publicAPIs)) {
+    applyRateLimit($page, 5, 10, 60); // Repetindo os parâmetros default para melhor legibilidade
+    require_once BACKEND . $publicAPIs[$page];
     exit; 
 }
 
+// Barreira de autenticação
+if (!isset($_SESSION["user_id"])) {
+    require_once 'login.html';
+    exit; 
+}
 
-// Barreira de segurança
-// if (!isset($_SESSION["user_logged"])) {
-//     // Se não estiver logado, exibe a tela de login/registro e para o script
-//     require_once 'login.html'; 
-//     exit; 
-// }
+$privateAPIs = require_once BACKEND . '/routes/private_api.php';
 
+if (array_key_exists($page, $privateAPIs)) {
+    applyRateLimit($page, 8, 10, 45); // Limite menos rígido para usuários logados
+    require_once BACKEND . $privateAPIs[$page];
+    exit; 
+}
 
-// Roteador GET
-$page = $_GET['page'] ?? 'home';
-$username = $_SESSION["username"] ?? 'Profile';
+// Carrega os dados do usuário
+require_once BACKEND . '/config/user.php';
 
-// Mapa de páginas do sistema c/ Nome para title
-$routes = [
-    'home'    => [__DIR__ . '/app/main/home.php', 'Home'],
-    'profile' => [__DIR__ . '/app/main/profile.php', $username],
-    'catalog' => [__DIR__ . '/app/main/catalog.php', 'Marketplace'],
-    'plus' => [__DIR__ . '/app/main/plus.php', 'Plus'],
-    'robux' => [__DIR__ . '/app/main/robux.php', 'Robux'],
-    'charts'  => [__DIR__ . '/app/main/charts.php', 'Charts'],
-];
+// Busca o array com a rota de páginas
+$routes = require_once BACKEND . "/routes/render.php";
 
-// Se a página digitada na URL não existir no mapa, renderiza o 404.php
+// Se a página digitada na URL não existir no mapa, renderiza o not_index.php (irmão do front-controller)
 if (!array_key_exists($page, $routes)) {
     http_response_code(404);
-    require_once __DIR__ . '/404.php';
+    require_once __DIR__ . '/not_index';
     exit;
 }
 
 // Extrai o conteúdo da página desejada
-$component = $routes[$page][0];
-$pageName = $routes[$page][1];
+$component = $routes[$page]['component']; // Renderizado dentro de body header.php -> <- footer.php
+$pageName = $routes[$page]['title']; // Título para a página <title>
 
+$cssPath = $routes[$page]['css']; 
+$jsPath = $routes[$page]['js'];
+
+// Ternário: Se importação não foi definida, envia uma string vazia para os próximos arquivos
+$cssImport = !empty($cssPath) ? "<link rel='stylesheet' href='/{$cssPath}'>" : ""; // Utilizado em head.php
+$jsImport = !empty($jsPath) ? "<script src='/{$jsPath}' defer></script>" : ""; // Utilizado em footer.php
+
+// Montagem sequencial do site
 require_once INCLUDES . '/head.php'; 
 require_once INCLUDES . '/header.php';
 require_once $component;
 require_once INCLUDES . '/footer.php';
+?>

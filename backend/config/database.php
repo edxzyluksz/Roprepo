@@ -1,28 +1,35 @@
 <?php
-    // backend/config/database.php
+    // .env -> Mantém informações sensíveis seguras (sem push no GitHub)
 
-    // Puxa as variáveis do $_ENV. Se não existirem, usa os valores padrão (fallback)
-    // $host = $_ENV['DB_HOST'] ?? 'localhost';
-    // $db   = $_ENV['DB_NAME'] ?? 'roprepo_db';
-    // $user = $_ENV['DB_USER'] ?? 'root';
-    // $pass = $_ENV['DB_PASS'] ?? ''; 
+    // Sobe 2 níveis a partir de database.php (config -> backend -> raiz)
+    $path_to_env = dirname(__DIR__, 2) . '/.env';
+    
+    // Lê o arquivo em um array, ignorando quebras de linha e linhas vazias
+    $lines = file($path_to_env, FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES);
 
-    // try {
-    //     // Configura a conexão PDO com suporte a caracteres UTF-8 modernos
-    //     $dsn = "mysql:host=$host;dbname=$db;charset=utf8mb4";
-        
-    //     $options = [
-    //         PDO::ATTR_ERRMODE            => PDO::ERRMODE_EXCEPTION, // Dispara exceções em caso de erros SQL
-    //         PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,       // Retorna os dados do banco como arrays associativos
-    //         PDO::ATTR_EMULATE_PREPARES   => false,                  // Usa prepare statements nativos para segurança contra SQL Injection
-    //     ];
+    foreach ($lines as $line) {
+        // Divide a linha em nome e valor no primeiro '=' que encontrar
+        list($name, $value) = explode('=', $line, 2);
+        // Salva a chave e o valor limpos dentro da superglobal $_ENV
+        $_ENV[trim($name)] = trim($value);
+    }
 
-    //     // Instancia a conexão globalmente na variável $pdo
-    //     $pdo = new PDO($dsn, $user, $pass, $options);
+    // Puxa as variáveis do $_ENV. 
+    $host = $_ENV['DB_HOST'] ?? 'localhost';
+    $db   = $_ENV['DB_NAME'] ?? 'roprepo_db';
+    $user = $_ENV['DB_USER'] ?? 'root';
+    $pass = $_ENV['DB_PASS'] ?? '';
 
-    // } catch (PDOException $e) {
-    //     // Em ambiente de desenvolvimento local, exibe o erro na tela. Em produção, mude para uma mensagem genérica.
-    //     http_response_code(500);
-    //     die("Database connection failed: " . $e->getMessage());
-    //}
+    // Conexão
+    try {
+        $pdo = new PDO (
+            "pgsql:host=$host;dbname=$db",
+            $user,
+            $pass
+        );
+    } catch(PDOException $e) {
+        echo "Error: " . $e->getMessage();
+    }
+
+    return $pdo;
 ?>

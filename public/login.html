@@ -5,12 +5,21 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Roprepo</title>
     <link rel="stylesheet" href="/assets/css/base.css">
+
+    <link rel="stylesheet" href="/assets/css/global/fonts.css">
+    <link rel="stylesheet" href="/assets/css/global/root.css">
+    <link rel="stylesheet" href="/assets/css/global/utils.css">
+
+    <link rel="stylesheet" href="/assets/css/components/main.css">
+    <link rel="stylesheet" href="/assets/css/components/footer.css">
+
     <link rel="stylesheet" href="/assets/css/pages/login.css">
+
     <link rel="shortcut icon" href="/assets/icons/common/roprepo-icon.svg" type="image/x-icon">
 </head>
 <body class="dark-mode">
-    <main class="login-main">
-        <form method="POST" class="acess-form">
+    <main>
+        <form method="POST" class="acess-form" novalidate>
             <h1>Welcome to Roprepo!</h1>
             <div class="input-group">
                 <input type="text" name="username" id="userInput" placeholder="Your username here..." autocomplete="off">
@@ -23,9 +32,10 @@
             <button type="submit" class='btn' id="submitBtn">Login</button>
         </form>
     </main>
-    <footer class="login-footer">
+    <footer>
         <span>&copy 2026 All rights reserved to Roblox Corporation (Made by <a href="https://github.com/edxzyluksz/" class="edxzy-media" target="_blank">EdxzyLuksz</a>)</span>
     </footer>
 </body>
-<script src="/assets/js/login.js" defer></script>
+<script src="/assets/js/global/url-cleaner.js"></script>
+<script src="/assets/js/pages/login.js" defer></script>
 </html>

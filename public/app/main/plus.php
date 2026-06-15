@@ -1,5 +1,10 @@
-
-<link rel="stylesheet" href="/assets/css/pages/main/plus.css">
+<?php
+if (!defined('ROPREPO_ACCESS')) {
+    http_response_code(404);
+    include __DIR__ . '/../../not_index.php';
+    exit;
+}
+?>
 <main>
     <section class="plus-intro">
         <div>

@@ -20,6 +20,10 @@
     border: 1px solid #d1ce34;
 }
 
+.no-transition, .no-transition * {
+    transition: none !important;
+}
+
 .hidden {
     max-height: 0;
     opacity: 0;

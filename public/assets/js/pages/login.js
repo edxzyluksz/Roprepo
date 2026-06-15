@@ -21,7 +21,8 @@ function hideMessage(element) {
     element.textContent = "";
 }
 
-aBtn.addEventListener('click', async () => {
+aBtn.addEventListener('click', async (e) => {
+    e.preventDefault(); // Impede o '#' aparecer na URL
     hideMessage(message);
     registerMode = !registerMode;
     submitBtn.classList.add("invisible-text");
@@ -86,15 +87,17 @@ form.addEventListener("submit", async (e) => {
         return;
     } 
 
-    if (passwdValue.length < 6) {
+    if (passwdValue.length < 8) {
         passwd.classList.add("warning")
-        showMessage(message, "Password must have atleast 6 characters.");
+        showMessage(message, "Password must have atleast 8 characters.");
         return;
     }
 
     // RegisterMode
     if (registerMode) {
-        if (!emailValue.includes("@") || !emailValue.includes(".")) {
+        const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+
+        if (!emailRegex.test(emailValue)) {
             email.classList.add("warning");
             showMessage(message, "Please enter a valid email address.");
             return;
@@ -108,7 +111,7 @@ form.addEventListener("submit", async (e) => {
         }
     }
 
-    const url = registerMode ? "/index.php?action=register" : "/index.php?action=login";
+    const url = registerMode ? "/register" : "/login";
     const formData = new FormData(form);
 
     try {
@@ -119,10 +122,24 @@ form.addEventListener("submit", async (e) => {
 
         const data = await response.json();
 
-        // Retornos do Servidor
-        
+        if (response.ok && data.success) {
+            if (data.redirect) {
+                window.location.href = data.redirect;
+            }
+        } else {
+            showMessage(message, data.message || "Authentication failed.");
+            
+            // Aplica as classes se a mensagem do erro menciona o campo.
+            if (data.message && data.message.toLowerCase().includes("username")) {
+                username.classList.add("warning");
+            } if (data.message && data.message.toLowerCase().includes("email")) {
+                email.classList.add("warning");
+            } if (data.message && data.message.toLowerCase().includes("password")) {
+                passwd.classList.add("warning");
+            }
+        } 
     } catch (error) {
-        console.error("Fetch Error:", error)
+        console.error("Error:", error)
         showMessage(message, "Something went wrong. Try again later.")
     }
 });
@@ -130,9 +147,16 @@ form.addEventListener("submit", async (e) => {
 inputs.forEach((input) => {
     input.addEventListener("focus", () => {
         hideMessage(message);
+        input.classList.remove("warning");
     })
     input.addEventListener("input", () => {
         input.classList.remove("failed-input") // Abordagem otimista (Remove a borda vermelha assim que algo mudar)
         input.classList.remove("warning");
     })
 })
+
+// Impede o usuário de digitar caracteres proibidos em tempo real
+// Permitindo apenas letras, números e underline _
+username.addEventListener("input", () => {
+    username.value = username.value.replace(/[^a-zA-Z0-9_]/g, "");
+});

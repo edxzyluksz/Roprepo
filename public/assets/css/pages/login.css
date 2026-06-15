@@ -1,7 +1,4 @@
-
-@import url(../base.css);
-
-.login-main {
+main {
     position: relative;
     overflow: hidden;
     justify-content: center;
@@ -10,7 +7,7 @@
     padding-inline: clamp(2rem, 10vw, 5rem);
 }
 
-.login-main::before {
+main::before {
     content: "";
     position: absolute;
     inset: 0;
@@ -22,7 +19,7 @@
     z-index: 0;
 }
 
-.login-main > * {
+main > * {
     position: relative;
     z-index: 1;
 }
@@ -56,7 +53,7 @@
     font-weight: 500;
 }
 
-.login-footer {
+footer {
     min-height: 10vh;
     padding: 1.5rem;
     font-size: clamp(0.75rem, 5vw, 1rem);

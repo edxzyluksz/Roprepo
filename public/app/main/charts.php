@@ -1,5 +1,10 @@
-
-<link rel="stylesheet" href="/assets/css/pages/main/charts.css">
+<?php
+if (!defined('ROPREPO_ACCESS')) {
+    http_response_code(404);
+    include __DIR__ . '/../../not_index.php';
+    exit;
+}
+?>
 <main>
     <h1>Charts</h1>
     <section class="available-games game-display">
@@ -173,4 +178,3 @@
         </nav>
     </section>
 </main>
-<script src="/assets/js/charts.js"></script>
