@@ -14,7 +14,7 @@ CREATE TABLE "users" (
     email VARCHAR(255) UNIQUE NOT NULL,
     password_hash VARCHAR(255) NOT NULL,
     pfp_url TEXT, -- Se for null, utiliza default.png
-    bio TEXT DEFAULT "I'm a Roprepian!",
+    bio TEXT DEFAULT $$I'm a Roprepian!$$,
     robux INT NOT NULL DEFAULT 0,
     dark_mode BOOLEAN DEFAULT TRUE,
     is_plus BOOLEAN DEFAULT FALSE,
@@ -40,13 +40,13 @@ CREATE TABLE "games" (
 -- Tabelas N:M
 CREATE TABLE "user_roles" (
     user_id BIGINT REFERENCES "users"(id) ON DELETE CASCADE,
-    role_id INT REFERENCES "roles"(id) ON DELETE CASCADE,
+    role_id SMALLINT REFERENCES "roles"(id) ON DELETE CASCADE,
     PRIMARY KEY (user_id, role_id)
 );
 
 CREATE TABLE "user_titles" (
     user_id BIGINT REFERENCES "users"(id) ON DELETE CASCADE,
-    title_id SMALLINT REFERENCES "titles"(id) ON DELETE CASCADE,
+    title_id INT REFERENCES "titles"(id) ON DELETE CASCADE,
     PRIMARY KEY (user_id, title_id)
 );
 
@@ -58,4 +58,19 @@ CREATE TABLE "user_games" (
     PRIMARY KEY (user_id, game_id)
 );
 
+CREATE TABLE "user_title_likes" (
+    user_id BIGINT REFERENCES "users"(id) ON DELETE CASCADE,
+    title_id INT REFERENCES "titles"(id) ON DELETE CASCADE,
+    liked_at TIMESTAMPTZ DEFAULT NOW(),
+
+    PRIMARY KEY(user_id, title_id)
+);
+
+CREATE TABLE "user_game_likes" (
+    user_id BIGINT REFERENCES "users"(id) ON DELETE CASCADE,
+    game_id INT REFERENCES "games"(id) ON DELETE CASCADE,
+    liked_at TIMESTAMPTZ DEFAULT NOW(),
+
+    PRIMARY KEY(user_id, game_id)
+);
 -- ON DELETE CASCADE PERMITE QUE ESSES REGISTROS SEJAM APAGADOS JUNTAMENTE COM O USUÁRIO CASO NECESSÁRIO.

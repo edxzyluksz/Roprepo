@@ -19,7 +19,12 @@ dialog {
     align-items: center;
     opacity: 0;
     pointer-events: none; 
-    transition: opacity 0.4s ease, pointer-events 0.4s ease;
+    transition: opacity 0.4s ease, pointer-events 0.4s ease, height 0.5s ease;
+}
+
+dialog.auto-height {
+    max-height: none;
+    height: fit-content;
 }
 
 dialog::backdrop {
@@ -48,6 +53,10 @@ dialog[open]::backdrop {
     gap: 1rem;
     flex-direction: column;
     align-items: center;
+}
+
+dialog.auto-height .modal-body {
+    flex: none;
 }
 
 dialog::-webkit-scrollbar,

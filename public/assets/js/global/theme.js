@@ -1,4 +1,5 @@
 const initialTheme = localStorage.getItem("theme") || "dark"; // Fallback - Assume que é dark
+import Modal from "../components/modal.js";
 
 const themeBtn = document.querySelectorAll(".js-theme-toggle");
 const timeGap = (ms) => new Promise(resolve => setTimeout(resolve, ms));

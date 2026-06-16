@@ -42,6 +42,7 @@ header {grid-area: header;}
 main {
     grid-area: main;
     align-items: center;
+    justify-content: center;
 }
 
 .user-profile-display {
@@ -118,6 +119,11 @@ main {
 }
 
 .card .btn {width: unset;}
+
+.user-card .user-pfp {
+    width: clamp(10%, 15vw, 20%);
+    border-radius: 15%;
+}
 
 .modal-centralize {align-self: center;} /* Util nichada: Apenas para centralizar divs no modal da página*/
 

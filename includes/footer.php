@@ -3,7 +3,7 @@
     </footer>
     <?php require_once 'modal.html'?>
 </body>
-<script src="/assets/js/global/theme.js"></script>
+<script src="/assets/js/global/theme.js" type="module"></script>
 <script src="/assets/js/global/url-cleaner.js"></script>
 <?=$jsImport?>
 </html>

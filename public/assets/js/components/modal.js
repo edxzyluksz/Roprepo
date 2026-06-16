@@ -34,6 +34,7 @@ const Modal = {
         this.el.querySelector(".modal-body").innerHTML = ""; 
         this.el.querySelector("h1").textContent = "";
         this.bodyScroll(true);
+        this.automaticHeight(false);
     },
 
     bodyScroll(statement) {
@@ -44,6 +45,12 @@ const Modal = {
     injectContent(content) {
         const body = this.el.querySelector(".modal-body");
         if (body) body.innerHTML = content
+    },
+
+    automaticHeight(auto) {
+        this.el.classList.toggle("auto-height", auto);
+        const body = this.el.querySelector(".modal-body");
+        body?.classList.toggle("auto-height", auto);
     }
 };
 

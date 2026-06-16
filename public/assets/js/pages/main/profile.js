@@ -31,7 +31,6 @@ async function btnAction(type){
 
             if (modalCache[type]) {
                 Modal.injectContent(modalCache[type]);
-                // ESSENCIAL: Tenta ativar as funções toda vez que injeta o HTML do cache
                 initDynamicFeatures(); 
                 return;
             }
@@ -45,14 +44,14 @@ async function btnAction(type){
                 
                 modalCache[type] = htmlInject;
                 Modal.injectContent(htmlInject);
-                
-                // ESSENCIAL: Ativa as funções assim que o fetch trouxer o HTML novo do PHP!
                 initDynamicFeatures();
 
             } catch(e) {
                 console.error("Fetch failed.", e);
                 Modal.injectContent("<p>Something went wrong.</p>");
             }
+
+            Modal.automaticHeight(true);
 
             break;
         case "plus":
@@ -66,14 +65,9 @@ async function btnAction(type){
     }
 }
 
-// ==========================================
-// FUNÇÃO CENTRAL DE INICIALIZAÇÃO DINÂMICA
-// ==========================================
-function initDynamicFeatures() {
-    // 1. Recursos da Bio
-    initBioFeature();
 
-    // 2. Recursos do Avatar
+function initDynamicFeatures() {
+    initBioFeature();
     initAvatarFeature();
 }
 
