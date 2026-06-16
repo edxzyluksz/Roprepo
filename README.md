@@ -136,7 +136,7 @@ Priorizando a documentação concisa, o projeto utilizará as seguintes ferramen
 * [Postgres](https://www.postgresql.org/) - Persistência dos dados dos usuários e seus atributos
 * [PHP](https://www.php.net/) - Trata a lógica de credenciais (login e senha)
 
-[!Icons](https://skillicons.dev/icons?i=vscode,figma,html,css,js,postgres,php)
+![Icons](https://skillicons.dev/icons?i=vscode,figma,html,css,js,postgres,php)
 
 ## 📃 Como Executar
 
