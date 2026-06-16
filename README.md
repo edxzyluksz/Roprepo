@@ -147,11 +147,22 @@ Para que este projeto funcione conforme o esperado, é necessário configurar al
 * Ativar `mbstring` para permitir validações de tamanho de texto multibyte usadas em `backend/auth/access.php`.
 * As demais funcionalidades usam módulos nativos do PHP, como `session`, `json`, `filter` e `password`.
 
-Antes de iniciar, copie `.env.example` para `.env` e configure as credenciais do PostgreSQL. Importe o esquema do banco de dados com o script `docs/sql/ddl.sql`.
+**Configuração de Ambiente:**
 
-E por fim, rodar no terminal:
+* Copiar `.env.example` para `.env` na root `/` e configurar as credenciais do PostgreSQL:
+
+``` plain
+    DB_HOST=localhost
+    DB_NAME=roprepo_db
+    DB_USER=postgres
+    DB_PASS=
+```
+
+* Importar o esquema + dados básicos banco com o arquivo `docs/sql/dump.sql` através do comando abaixo.
+* Executar estas instruções no bash:
 
 ```bash
+    psql -d roprepo_db -f /docs/sql/dump.sql   
     cd public
     php -S localhost:8080 index.php
 ```
