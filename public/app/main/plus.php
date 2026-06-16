@@ -9,7 +9,7 @@ if (!defined('ROPREPO_ACCESS')) {
     <section class="plus-intro">
         <div>
             <h1>Roprepo Plus</h1>
-            <img src="/assets/icons/external/roblox-plus.svg" alt="Plus Icon">
+            <img src="/assets/icons/external/roblox-plus.svg" alt="Plus Icon" class="mono-icon">
         </div>
         <p>
             With the goal of recognizing and rewarding the dedication of our most engaged users, 

@@ -7,7 +7,7 @@
 
     $user_id = $_SESSION['user_id']; // Shortcut para obter o id
     try {
-        $sql = "SELECT u.bio, u.is_plus, u.active_title, u.created_at,
+        $sql = "SELECT u.bio, u.is_plus, u.active_title, TO_CHAR(u.created_at, 'MM/DD/YYYY') as created_at,
                     t.name AS title_name, t.color_hex AS title_color
                 FROM users u LEFT JOIN titles t ON u.active_title = t.id
                 WHERE u.id = :user_id";
@@ -35,49 +35,49 @@
 ?>
 
 <aside class="profile-control">
-    <button class="btn">
+    <button class="btn js-profile-tab" data-section="titles">
         <img src="/assets/icons/external/backpack.svg" class="mono-icon">
         <span>My Titles</span>
     </button>
-    <button class="btn">
+    <button class="btn js-profile-tab" data-section="games">
         <img src="/assets/icons/external/charts.svg" class="mono-icon">
         <span>Played Games</span>
     </button>
-    <button class="btn">
+    <button class="btn js-profile-tab" data-section="bio">
         <img src="/assets/icons/external/pen.svg" class="mono-icon">
         <span>Biography</span>
     </button>
-    <button class="btn">
+    <button class="btn js-profile-tab" data-section="avatar">
         <img src="/assets/icons/external/avatar.svg" class="mono-icon">
         <span>Avatar</span>
     </button>
-    <button class="btn">
-        <img src="/assets/icons/external/lock.svg" class="mono-icon">
-        <span>???</span>
+    <button class="btn js-profile-tab" data-section="plus">
+        <img src="/assets/icons/external/roblox-plus.svg" class="mono-icon">
+        <span>Plus</span>
     </button>
     <button class="btn js-theme-toggle">
         <img src="/assets/icons/external/theme.svg" class="mono-icon">
         <span>Theme</span>
     </button>
     <!-- Botão destinado a cargos privilegiados  -->
-    <button class="btn">
+    <button class="btn js-profile-tab" data-section="users">
         <img src="/assets/icons/external/profile.svg" class="mono-icon">
         <span>Users</span>
     </button>
-    <button class="btn" id="logout-btn">
+    <button class="btn js-profile-tab" data-section="logout">
         <img src="/assets/icons/external/gear.svg" class="mono-icon">
         <span>Logout</span>
     </button>
 </aside>
 <main>
     <div class="user-profile-display">
-        <h1>My Profile</h1>
+        <h1>@<?=$user_name?></h1>
         <img src= <?=$user_pfp?> alt="Profile Picture" class="user-pfp">
         <div class="user-info">
-            <h2>@<?=$user_name?></h2>
-            <h2>Title: Player</h2>
+            <i><?=$profileData['bio']?></i>
+            <h2>Title: <?=$profileData['title_name']?></h2>
             <h2>Robux: <?=$user_robux?></h2>
-            <h2>Created at: MM/DD/YYYY</h2>
+            <h2>Joined at: <?=$profileData['created_at']?></h2>
         </div>
     </div>
 </main>

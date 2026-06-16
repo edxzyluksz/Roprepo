@@ -1,16 +1,51 @@
 const Modal = {
     el: document.querySelector("dialog"),
-    
-    open(title, content) {
+
+    init() {
         if (!this.el) return;
-        this.el.querySelector("h1").textContent = title;
-        this.el.querySelector(".modal-body").innerHTML = content;
-        this.el.showModal();
+
+        this.el.addEventListener("click", (event) => {
+            const rect = this.el.getBoundingClientRect();
+            const clickedOutside = (
+                event.clientX < rect.left ||
+                event.clientX > rect.right ||
+                event.clientY < rect.top ||
+                event.clientY > rect.bottom
+            );
+
+            if (clickedOutside) {
+                this.close();
+            }
+        });
+
+        this.el.addEventListener("close", () => {
+            this.bodyScroll(true);
+        });
     },
+
+    open(title) {
+        this.el.querySelector("h1").textContent = title;
+        this.el.showModal();
+        this.bodyScroll(false);
+    },
+
     close() {
-        if (!this.el) return;
         this.el.close();
         this.el.querySelector(".modal-body").innerHTML = ""; 
         this.el.querySelector("h1").textContent = "";
+        this.bodyScroll(true);
+    },
+
+    bodyScroll(statement) {
+        if (statement) document.body.classList.remove("modal-open");
+        else document.body.classList.add("modal-open");
+    },
+
+    injectContent(content) {
+        const body = this.el.querySelector(".modal-body");
+        if (body) body.innerHTML = content
     }
 };
+
+Modal.init();
+export default Modal;

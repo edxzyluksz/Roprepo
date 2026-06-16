@@ -1,4 +1,4 @@
-.home-main {
+main {
     gap: 4rem;
     align-items: center;
     justify-content: center;
@@ -9,11 +9,14 @@
     align-items: center;
     height: clamp(6.25rem, 10vh, 12.5rem);
     gap: 1rem;
-    text-wrap: nowrap;
 }
 
 main .user-pfp {
     width: clamp(5rem, 10vw, 10rem);
+}
+
+main > h1 {
+    text-align: center;
 }
 
 h1 {

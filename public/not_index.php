@@ -9,7 +9,8 @@
         exit;
     }
 
-    define('INCLUDES', realpath(__DIR__ . '/../includes'));
+    if (!defined('INCLUDES')) define('INCLUDES', __DIR__ . '/../includes');
+    
     $pageName = "Page Not Found";
     $cssImport = "<link rel='stylesheet' href='/assets/css/pages/main/404.css'>";
     $jsImport = "";

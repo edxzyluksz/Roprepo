@@ -6,7 +6,7 @@ if (!defined('ROPREPO_ACCESS')) {
     exit;
 }
 ?>
-<main class="home-main">
+<main>
     <section class="user-greetings">
         <img src=<?=$user_pfp?> alt="Your Profile Picture" class="user-pfp">
         <h1>Greetings, <?=$user_name?>!</h1>

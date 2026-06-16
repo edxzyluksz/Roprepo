@@ -21,11 +21,11 @@
         <div class="user-section">
             <a href="/profile" class="profile-src"><img src= <?=$user_pfp?> alt="profile picture" class="user-pfp"></a>
             <a class="robux-card" href="/robux">
-                <img src="/assets/icons/external/robux.svg" alt="Robux Icon" class="robux">
+                <img src="/assets/icons/external/robux.svg" alt="Robux Icon" class="robux mono-icon">
                 <p><?=$user_robux?></p>
             </a>
             <button class="theme-mode js-theme-toggle">
-                <img src="/assets/icons/external/theme.svg" alt="Change Theme" class="theme-mode-img">
+                <img src="/assets/icons/external/theme.svg" alt="Change Theme" class="theme-mode-img mono-icon">
             </button>
         </div>
     </header>

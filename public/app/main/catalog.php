@@ -9,12 +9,12 @@ if (!defined('ROPREPO_ACCESS')) {
 <main>
     <h1>Marketplace</h1>
     <section class="catalog-item-display">
-        <a href="#" class="marketplace-item">
+        <a href="#" class="marketplace-item skeleton">
             <img src="" alt="Title Color">
             <div class="item-info">
                 <h3 class="marketplace-item-name">Title</h3>
                 <div class="item-price">
-                    <img src="assets/icons/external/robux.svg" class="price-icon">
+                    <img src="assets/icons/external/robux.svg" class="price-icon mono-icon">
                     <span class="price-label">100</span>
                 </div>
             </div>
@@ -24,7 +24,7 @@ if (!defined('ROPREPO_ACCESS')) {
             <div class="item-info">
                 <h3 class="marketplace-item-name">Title</h3>
                 <div class="item-price">
-                    <img src="assets/icons/external/robux.svg" class="price-icon">
+                    <img src="assets/icons/external/robux.svg" class="price-icon mono-icon">
                     <span class="price-label">100</span>
                 </div>
             </div>
@@ -34,7 +34,7 @@ if (!defined('ROPREPO_ACCESS')) {
             <div class="item-info">
                 <h3 class="marketplace-item-name">Title</h3>
                 <div class="item-price">
-                    <img src="assets/icons/external/robux.svg" class="price-icon">
+                    <img src="assets/icons/external/robux.svg" class="price-icon mono-icon">
                     <span class="price-label">100</span>
                 </div>
             </div>
@@ -44,7 +44,7 @@ if (!defined('ROPREPO_ACCESS')) {
             <div class="item-info">
                 <h3 class="marketplace-item-name">Title</h3>
                 <div class="item-price">
-                    <img src="assets/icons/external/robux.svg" class="price-icon">
+                    <img src="assets/icons/external/robux.svg" class="price-icon mono-icon">
                     <span class="price-label">100</span>
                 </div>
             </div>
@@ -54,7 +54,7 @@ if (!defined('ROPREPO_ACCESS')) {
             <div class="item-info">
                 <h3 class="marketplace-item-name">Title</h3>
                 <div class="item-price">
-                    <img src="assets/icons/external/robux.svg" class="price-icon">
+                    <img src="assets/icons/external/robux.svg" class="price-icon mono-icon">
                     <span class="price-label">100</span>
                 </div>
             </div>
@@ -64,7 +64,7 @@ if (!defined('ROPREPO_ACCESS')) {
             <div class="item-info">
                 <h3 class="marketplace-item-name">Title</h3>
                 <div class="item-price">
-                    <img src="assets/icons/external/robux.svg" class="price-icon">
+                    <img src="assets/icons/external/robux.svg" class="price-icon mono-icon">
                     <span class="price-label">100</span>
                 </div>
             </div>
@@ -74,7 +74,7 @@ if (!defined('ROPREPO_ACCESS')) {
             <div class="item-info">
                 <h3 class="marketplace-item-name">Title</h3>
                 <div class="item-price">
-                    <img src="assets/icons/external/robux.svg" class="price-icon">
+                    <img src="assets/icons/external/robux.svg" class="price-icon mono-icon">
                     <span class="price-label">100</span>
                 </div>
             </div>
@@ -84,7 +84,7 @@ if (!defined('ROPREPO_ACCESS')) {
             <div class="item-info">
                 <h3 class="marketplace-item-name">Title</h3>
                 <div class="item-price">
-                    <img src="assets/icons/external/robux.svg" class="price-icon">
+                    <img src="assets/icons/external/robux.svg" class="price-icon mono-icon">
                     <span class="price-label">100</span>
                 </div>
             </div>
@@ -94,7 +94,7 @@ if (!defined('ROPREPO_ACCESS')) {
             <div class="item-info">
                 <h3 class="marketplace-item-name">Title</h3>
                 <div class="item-price">
-                    <img src="assets/icons/external/robux.svg" class="price-icon">
+                    <img src="assets/icons/external/robux.svg" class="price-icon mono-icon">
                     <span class="price-label">100</span>
                 </div>
             </div>
@@ -104,7 +104,7 @@ if (!defined('ROPREPO_ACCESS')) {
             <div class="item-info">
                 <h3 class="marketplace-item-name">Title</h3>
                 <div class="item-price">
-                    <img src="assets/icons/external/robux.svg" class="price-icon">
+                    <img src="assets/icons/external/robux.svg" class="price-icon mono-icon">
                     <span class="price-label">100</span>
                 </div>
             </div>
@@ -114,7 +114,7 @@ if (!defined('ROPREPO_ACCESS')) {
             <div class="item-info">
                 <h3 class="marketplace-item-name">Title</h3>
                 <div class="item-price">
-                    <img src="assets/icons/external/robux.svg" class="price-icon">
+                    <img src="assets/icons/external/robux.svg" class="price-icon mono-icon">
                     <span class="price-label">100</span>
                 </div>
             </div>
@@ -124,7 +124,7 @@ if (!defined('ROPREPO_ACCESS')) {
             <div class="item-info">
                 <h3 class="marketplace-item-name">Title</h3>
                 <div class="item-price">
-                    <img src="assets/icons/external/robux.svg" class="price-icon">
+                    <img src="assets/icons/external/robux.svg" class="price-icon mono-icon">
                     <span class="price-label">100</span>
                 </div>
             </div>
@@ -134,7 +134,7 @@ if (!defined('ROPREPO_ACCESS')) {
             <div class="item-info">
                 <h3 class="marketplace-item-name">Title</h3>
                 <div class="item-price">
-                    <img src="assets/icons/external/robux.svg" class="price-icon">
+                    <img src="assets/icons/external/robux.svg" class="price-icon mono-icon">
                     <span class="price-label">100</span>
                 </div>
             </div>
@@ -144,7 +144,7 @@ if (!defined('ROPREPO_ACCESS')) {
             <div class="item-info">
                 <h3 class="marketplace-item-name">Title</h3>
                 <div class="item-price">
-                    <img src="assets/icons/external/robux.svg" class="price-icon">
+                    <img src="assets/icons/external/robux.svg" class="price-icon mono-icon">
                     <span class="price-label">100</span>
                 </div>
             </div>
@@ -154,7 +154,7 @@ if (!defined('ROPREPO_ACCESS')) {
             <div class="item-info">
                 <h3 class="marketplace-item-name">Title</h3>
                 <div class="item-price">
-                    <img src="assets/icons/external/robux.svg" class="price-icon">
+                    <img src="assets/icons/external/robux.svg" class="price-icon mono-icon">
                     <span class="price-label">100</span>
                 </div>
             </div>
@@ -164,7 +164,7 @@ if (!defined('ROPREPO_ACCESS')) {
             <div class="item-info">
                 <h3 class="marketplace-item-name">Title</h3>
                 <div class="item-price">
-                    <img src="assets/icons/external/robux.svg" class="price-icon">
+                    <img src="assets/icons/external/robux.svg" class="price-icon mono-icon">
                     <span class="price-label">100</span>
                 </div>
             </div>
@@ -174,7 +174,7 @@ if (!defined('ROPREPO_ACCESS')) {
             <div class="item-info">
                 <h3 class="marketplace-item-name">Title</h3>
                 <div class="item-price">
-                    <img src="assets/icons/external/robux.svg" class="price-icon">
+                    <img src="assets/icons/external/robux.svg" class="price-icon mono-icon">
                     <span class="price-label">100</span>
                 </div>
             </div>
@@ -184,7 +184,7 @@ if (!defined('ROPREPO_ACCESS')) {
             <div class="item-info">
                 <h3 class="marketplace-item-name">Title</h3>
                 <div class="item-price">
-                    <img src="assets/icons/external/robux.svg" class="price-icon">
+                    <img src="assets/icons/external/robux.svg" class="price-icon mono-icon">
                     <span class="price-label">100</span>
                 </div>
             </div>

@@ -1,32 +1,40 @@
-dialog:not([open]) {
-    display: none;
-}
-
 dialog {
     text-align: center;
-    background-color: var(--pressed-surface);
+    background-color: var(--surface-color);
     border: 1px solid gray;
     border-radius: 15px;
-    position: fixed; 
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    margin: 0;
     box-shadow: 0 4px 12px var(--text-color);
-    width: clamp(18.5rem, 35vw, 29rem);
-    height: clamp(30rem, 55vh, 38rem); 
-
+    width: clamp(30rem, 35vw, 35rem);
+    height: clamp(40rem, 60vh, 50rem);
+    max-width: 90vw;
+    max-height: 90vh;
+    padding: 24px 0;
+    overflow: hidden;
+    position: fixed;
+    inset: 0;
+    margin: auto;
     display: flex;
     flex-direction: column;
     justify-content: flex-start; 
     align-items: center;
-    padding: 24px 0;
-
-    overflow: hidden;
+    opacity: 0;
+    pointer-events: none; 
+    transition: opacity 0.4s ease, pointer-events 0.4s ease;
 }
 
 dialog::backdrop {
-    background: rgba(0, 0, 0, 0.6);
+    background-color: rgba(0, 0, 0, 0);
+    backdrop-filter: blur(0px);
+    transition: background-color 0.4s ease, backdrop-filter 0.4s ease;
+}
+
+dialog[open] {
+    opacity: 1;
+    pointer-events: auto; 
+}
+
+dialog[open]::backdrop {
+    background-color: rgba(0, 0, 0, 0.6);
     backdrop-filter: blur(2px);
 }
 
@@ -37,22 +45,22 @@ dialog::backdrop {
     padding: 10px 16px; 
     box-sizing: border-box;
     display: flex;
+    gap: 1rem;
     flex-direction: column;
     align-items: center;
 }
 
-
 dialog::-webkit-scrollbar,
 .modal-body::-webkit-scrollbar {
-    width: 6px !important;
+    width: 6px;
     background: transparent;
 }
 
 dialog::-webkit-scrollbar-button,
 .modal-body::-webkit-scrollbar-button {
-    display: none !important;
-    width: 0 !important;
-    height: 0 !important;
+    display: none;
+    width: 0;
+    height: 0;
     -webkit-appearance: none;
 }
 

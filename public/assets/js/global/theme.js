@@ -30,7 +30,7 @@ themeBtn.forEach(button => {
             if (!response.ok) throw new Error("Action could not be completed:" + response.status);
         } catch(error) {
             console.log("Error: Could not change on database.")
-            document.body.classList.toggle("dark-mode");
+            document.body.classList.toggle("dark-mode"); // Retorna para o tema anterior
             localStorage.setItem("theme", !isDark ? "dark" : "light");
         } finally {
             await timeGap(100);

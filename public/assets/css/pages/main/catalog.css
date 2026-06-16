@@ -4,8 +4,10 @@ main {
 
 .catalog-item-display {
     display: grid;
+    width: 90%;
     grid-template-columns: repeat(auto-fill, minmax(180px, 3fr));
     gap: 1.5rem;
+    align-self: center;
 }
 
 .marketplace-item {
@@ -21,7 +23,7 @@ main {
     aspect-ratio: 1 / 1;
     object-fit: cover;
     border-radius: 8px;
-    background-color: #555;
+    background-color: var(--pressed-surface);
     margin-bottom: 0.75rem;
 }
 
@@ -47,8 +49,8 @@ main {
 }
 
 .price-icon {
-    width: 16px;
-    height: 16px;
+    width: 1rem;
+    aspect-ratio: 1 / 1;
 }
 
 .price-label {

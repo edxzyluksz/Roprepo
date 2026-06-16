@@ -1,4 +1,19 @@
 <?php
+
+// Extrai apenas o caminho da URL (ignorando parâmetros como ?id=1)
+$uri = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
+
+// Tenta capturar a extensão do arquivo (ex: "css" de "/assets/css/base.css")
+$extension = pathinfo($uri, PATHINFO_EXTENSION);
+
+// Se houver uma extensão na URL, validamos se é um arquivo estático permitido
+if ($extension) {
+    $allowedExtensions = require_once __DIR__ . '/../backend/config/allowed_extensions.php';
+        if (in_array(strtolower($extension), $allowedExtensions)) {
+        return false; // Permite que o arquivo estático seja renderizado sem a intervenção do script
+    }
+}
+
 session_start();
 
 // Chave de Segurança: Impede do usuário digitar caminhos reais do servidor na URL
@@ -49,7 +64,7 @@ $routes = require_once BACKEND . "/routes/render.php";
 // Se a página digitada na URL não existir no mapa, renderiza o not_index.php (irmão do front-controller)
 if (!array_key_exists($page, $routes)) {
     http_response_code(404);
-    require_once __DIR__ . '/not_index';
+    require_once __DIR__ . '/not_index.php';
     exit;
 }
 
@@ -62,7 +77,7 @@ $jsPath = $routes[$page]['js'];
 
 // Ternário: Se importação não foi definida, envia uma string vazia para os próximos arquivos
 $cssImport = !empty($cssPath) ? "<link rel='stylesheet' href='/{$cssPath}'>" : ""; // Utilizado em head.php
-$jsImport = !empty($jsPath) ? "<script src='/{$jsPath}' defer></script>" : ""; // Utilizado em footer.php
+$jsImport = !empty($jsPath) ? "<script src='/{$jsPath}' type='module'></script>" : ""; // Utilizado em footer.php
 
 // Montagem sequencial do site
 require_once INCLUDES . '/head.php'; 

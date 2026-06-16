@@ -19,10 +19,6 @@ main {
     height: clamp(1.5rem, 10vw, 3rem);
 }
 
-.dark-mode .plus-intro img { 
-    filter: brightness(0) invert(1);
-}
-
 .plus-images {
     display: flex;
     justify-content: center;

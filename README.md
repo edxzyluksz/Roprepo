@@ -4,6 +4,8 @@
 
 Um projeto web com PHP Vanilla com o intuito buscar, de acordo com as preferências do estudante, um tópico de interesse que esteja dentro das adequações do CRUD (Create, Read, Update, Delete) - As 4 operações básicas de um Banco de Dados. Este repositório escolheu imitar a interface padrão do Roblox.
 
+Na prática, o projeto já conta com um front controller em `public/index.php`, autenticação via sessão PHP, e conexão com PostgreSQL via `backend/config/database.php`. A lógica de login/cadastro é tratada em `backend/auth/access.php` com respostas JSON para o frontend.
+
 ## 🧠 Contextualização
 
 Roblox é uma plataforma de jogos online e um sistema de criação de jogos desenvolvido pela Roblox Corporation que permite aos usuários programar e jogar jogos criados por eles próprios ou por outros usuários. Foi criado por David Baszucki e Erik Cassel em 2004 e lançado ao público em 2006. Em fevereiro de 2025, a plataforma registrava uma média de 85.3 milhões de usuários ativos diários. Segundo a empresa, sua base mensal de jogadores inclui metade de todas as crianças norte-americanas com menos de 16 anos. Fonte: [Wikipedia](https://pt.wikipedia.org/wiki/Roblox)
@@ -29,6 +31,8 @@ O site deverá seguir os elementos visuais encontrados na plataforma oficial do 
 ### 🔐 Cadastro/Login
 
 Para usuários que não possuem uma sessão atual e devem criar uma conta para prosseguir.
+
+Essa interface de login/cadastro está implementada em `public/login.html` com validação de formulário em `public/assets/js/pages/login.js`, e a API de autenticação é processada por `backend/auth/access.php`.
 
 ### 🏠 Home
 
@@ -65,7 +69,7 @@ Com o objetivo de não deixar a bola cair no chão, o jogador irá acumular pont
 #### 🎰 Cassino
 
 Alto risco, alto ganho - O jogador poderá apostar os seus robux atuais para obter a chance de ganhar mais... Ou perdê-los.
-
+Os jogos são protótipos localizados em `public/app/games/` e, no estado atual do projeto, ainda não estão integrados ao fluxo de rotas dinâmicas do front controller.
 #### 🐀 Jogo da Toupeira
 
 Múltiplas entidades aparecerão na tela em questão de segundos. O objetivo é acertar o máximo de toupeiras possível antes que atinja um alvo que encerre o jogo.
@@ -81,6 +85,8 @@ Os pontos ficarão guardados até que o jogo encerre de fato, para multiplicá-l
 ## 🧩 Modelagem de Dados
 
 A modelagem de dados é a parte principal para determinar as entidades da aplicação. Em Roprepo, existirão três entidades principais: Users, Games, Titles. Seus esquemas estão presentes em `/docs/sql/ddl`.
+
+O esquema real em `docs/sql/ddl.sql` inclui tabelas adicionais de relacionamento como `roles`, `user_roles` e `user_titles`, bem como campos de preferências do usuário (`dark_mode`, `is_plus`, `robux`).
 
 ## 🔧 Requisitos Técnicos
 
@@ -108,6 +114,7 @@ Todo usuário deverá possuir por padrão, porém não limitado a:
 * Total de 0 `robux` iniciais
 * `dark_mode` habilitado
 * Roprepo `plus` desabilitado
+* As rotas públicas e privadas são separadas em `backend/routes/public_api.php` e `backend/routes/private_api.php` para proteger ações sem sessão.
 
 ## ✅ Boas Práticas
 
@@ -115,7 +122,7 @@ No desenvolvimento do back-end deste projeto, seguirá-se estas práticas:
 
 * **NUNCA** Confiar no Cliente. Sempre valide entradas enviadas pelo navegador.
 * Ao usuário atualizar sua foto de perfil, remova a anterior de `avatars/` imediatamente.
-* Redirecionar clientes ao conteúdo da página `404.php` caso digite um GET inválido no URL.
+* Redirecionar clientes ao conteúdo da página `not_index.php` caso digite um GET inválido no URL.
 
 ## ⚒️ Ferramentas
 
@@ -130,3 +137,27 @@ Priorizando a documentação concisa, o projeto utilizará as seguintes ferramen
 * [PHP](https://www.php.net/) - Trata a lógica de credenciais (login e senha)
 
 [!Icons](https://skillicons.dev/icons?i=vscode,figma,html,css,js,postgres,php)
+
+## 📃 Como Executar
+
+Para que este projeto funcione conforme o esperado, é necessário configurar alguns elementos do PHP:
+
+* Ativar a extensão `pdo_pgsql` em `php.ini` para permitir a conexão PDO com PostgreSQL.
+* Caso sua distribuição PHP não carregue automaticamente, ative também `pgsql`.
+* Ativar `mbstring` para permitir validações de tamanho de texto multibyte usadas em `backend/auth/access.php`.
+* As demais funcionalidades usam módulos nativos do PHP, como `session`, `json`, `filter` e `password`.
+
+Antes de iniciar, copie `.env.example` para `.env` e configure as credenciais do PostgreSQL. Importe o esquema do banco de dados com o script `docs/sql/ddl.sql`.
+
+E por fim, rodar no terminal:
+
+```bash
+    cd public
+    php -S localhost:8080 index.php
+```
+
+**Porquê mencionar index.php**: Considerando sua atuação como o Front-Controller do projeto, é necessário que todas as requisições passem por ele. Caso contrário, o cliente pode tentar acessar arquivos percorrendo caminhos internos do servidor. Além disso, o roteamento mantém as URLs limpas através de instruções simples, como `/catalog`, que só é executada por estar registrada em `backend/routes/render.php`
+
+**Problema**: Seguindo esta abordagem, qualquer caminho que o navegador tentar acessar (como um arquivo css), será obrigatoriamente interceptado pelo servidor através do Front-Controller, não renderizando como o esperado. Para contorná-lo, existe uma lista de extensões permitidas em `backend/config/allowed_extensions.php` que é executada pelo index, o que permite a passagem destes arquivos considerados estáticos.
+
+Sem um servidor Apache, esta é a forma mais limpa de resolver.

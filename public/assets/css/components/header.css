@@ -21,9 +21,7 @@ header {
     font-weight: 500;
 }
 
-.nav-link:hover {
-    border-bottom-color: var(--text-color);
-}
+.nav-link:hover {border-bottom-color: var(--text-color);}
 
 .roprepo-logo {
     height: 90%;
@@ -39,13 +37,9 @@ header {
     align-items: center;
 }
 
-.roprepo-logo-img {
-    height: 85%;
-}
+.roprepo-logo-img {height: 85%;}
 
-.logo-icon {
-    display: none;
-}
+.logo-icon {display: none;}
 
 .page-switch {
     display: flex;
@@ -78,9 +72,7 @@ header {
     align-items: center;
 }
 
-header .user-pfp {
-    height: 95%;
-}
+header .user-pfp {height: 95%}
 
 .robux-card {
     display: flex;
@@ -93,18 +85,14 @@ header .user-pfp {
     transition: background-color 0.3s ease;
 }
 
-.robux-card p {
-    font-weight: 600;
-}
+.robux-card p {font-weight: 600;}
 
 .robux-card:hover {
     background-color: var(--pressed-surface);
     cursor: pointer;
 }
 
-.robux {
-    height: 70%;
-}
+.robux {height: 70%;}
 
 .theme-mode {
     height: 75%;
@@ -112,29 +100,12 @@ header .user-pfp {
     background-color: transparent;
 }
 
-.theme-mode-img {
-    height: 100%;
-}
+.theme-mode-img {height: 100%;}
 
 /* DARK MODE */
-.logo-white {
-    display: none;
-}
-
-body.dark-mode .logo-black {
-    display: none;
-}
-body.dark-mode .logo-white {
-    display: block;
-}
-
-body.dark-mode .theme-mode-img {
-    filter: brightness(0) invert(1);
-}
-
-body:not(.dark-mode) .robux {
-    filter: brightness(0);
-}
+.logo-white {display: none;}
+body.dark-mode .logo-black {display: none;}
+body.dark-mode .logo-white {display: block;}
 
 /* MEDIA QUERIES */
 @media (max-width: 780px) {
