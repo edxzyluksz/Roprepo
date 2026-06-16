@@ -162,10 +162,18 @@ Para que este projeto funcione conforme o esperado, é necessário configurar al
 * Executar estas instruções no bash:
 
 ```bash
-    psql -d roprepo_db -f /docs/sql/dump.sql   
+    createdb -U postgres roprepo_db
+    psql -d roprepo_db -U postgres -f docs/sql/dump.sql   
     cd public
     php -S localhost:8080 index.php
 ```
+
+Por padrão, os três campos pré-existentes no dump são:
+
+* `title: Player`
+* `role: user, admin`
+
+> Levar isto em consideração quando forkar o projeto.
 
 **Porquê mencionar index.php**: Considerando sua atuação como o Front-Controller do projeto, é necessário que todas as requisições passem por ele. Caso contrário, o cliente pode tentar acessar arquivos percorrendo caminhos internos do servidor. Além disso, o roteamento mantém as URLs limpas através de instruções simples, como `/catalog`, que só é executada por estar registrada em `backend/routes/render.php`
 
